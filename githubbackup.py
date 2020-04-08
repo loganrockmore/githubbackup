@@ -10,7 +10,7 @@ import sys
 import urllib2
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--token", help = "Github Personal Access Token", required=True)
+parser.add_argument("--token", help = "Github Personal Access Token. This can be generated at https://github.com/settings/tokens", required=True)
 parser.add_argument("--output", help = "Path to the output directory", required=True)
 args = parser.parse_args()
 
