@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import argparse
 import base64
@@ -7,7 +7,7 @@ import json
 import os
 import subprocess
 import sys
-import urllib2
+import urllib.request
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--token", help = "Github Personal Access Token. This can be generated at https://github.com/settings/tokens", required=True)
@@ -15,13 +15,13 @@ parser.add_argument("--output", help = "Path to the output directory", required=
 args = parser.parse_args()
 
 headers = {"Authorization" : "token %s" % (args.token)}
-request = urllib2.Request('https://api.github.com/user/repos?per_page=100', headers=headers)
-responseData = urllib2.urlopen(request)
+request = urllib.request.Request('https://api.github.com/user/repos?per_page=100', headers=headers)
+responseData = urllib.request.urlopen(request)
 responseString = responseData.read()
 response = json.loads(responseString)
 
 if 100 <= len(response):
-	print "ERROR: this script only gets the first 100 repos and it appears that this user has reached that limit. At this point, this script needs to be updated to handle pagination of the Github API."
+	print("ERROR: this script only gets the first 100 repos and it appears that this user has reached that limit. At this point, this script needs to be updated to handle pagination of the Github API.")
 	sys.exit(999)
 	
 # make the output directory
